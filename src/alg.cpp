@@ -8,7 +8,15 @@ int countPairs1(int *arr, int len, int value) {
     for (int j = i + 1; j < len; ++j) {
       if (arr[i] + arr[j] == value) {
         ++count;
+        int temp = arr[j];
+        while (j + 1 < len && arr[j + 1] == temp) {
+          ++j;
+        }
       }
+    }
+    int temp = arr[i];
+    while (i + 1 < len && arr[i + 1] == temp) {
+      ++i;
     }
   }
   return count;
@@ -22,6 +30,14 @@ int countPairs2(int *arr, int len, int value) {
     int sum = arr[left] + arr[right];
     if (sum == value) {
       ++count;
+      int left_val = arr[left];
+      int right_val = arr[right];
+      while (left + 1 < len && arr[left + 1] == left_val) {
+        ++left;
+      }
+      while (right - 1 >= 0 && arr[right - 1] == right_val) {
+        --right;
+      }
       ++left;
       --right;
     } else if (sum < value) {
@@ -57,6 +73,15 @@ int countPairs3(int *arr, int len, int value) {
     int index = binarySearch(arr, i + 1, len - 1, target);
     if (index != -1) {
       ++count;
+      int temp = arr[index];
+      while (index + 1 < len && arr[index + 1] == temp) {
+        ++index;
+      }
+      i = index;
+    }
+    int temp = arr[i];
+    while (i + 1 < len && arr[i + 1] == temp) {
+      ++i;
     }
   }
   return count;
